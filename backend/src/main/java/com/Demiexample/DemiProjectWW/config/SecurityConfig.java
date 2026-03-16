@@ -22,11 +22,11 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 	        .cors(Customizer.withDefaults())
 	        .authorizeHttpRequests(auth -> auth
-	                .requestMatchers("/login").permitAll()
+	                .requestMatchers("/","/login").permitAll()
 	                .anyRequest().authenticated()
-	        )
-	        .formLogin(form -> form.disable());
-
+	        ).formLogin(form -> form
+                        .defaultSuccessUrl("/home", true)
+                );
 	    return http.build();
 	}
 

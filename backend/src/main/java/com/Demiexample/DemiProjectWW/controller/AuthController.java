@@ -24,4 +24,9 @@ public class AuthController {
     public String sipPage(){
         return "This is SPI page";
     }
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "Login endpoint - use POST to authenticate";
+    }
 }
