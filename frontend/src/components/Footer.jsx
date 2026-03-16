@@ -1,22 +1,22 @@
-function Footer(){
+import "../styles/Footer.css";
 
-return(
+export default function Footer() {
+  return (
+    <footer className="ww-footer">
+      <div className="f-left">
+        <div className="logo">WealthWise</div>
+        <p className="muted">Build better financial habits</p>
+      </div>
 
-<div style={{
-marginTop:"40px",
-padding:"20px",
-background:"#1e293b",
-color:"white",
-textAlign:"center"
-}}>
+      <div className="f-links">
+        <a>About</a>
+        <a>Docs</a>
+        <a>Careers</a>
+      </div>
 
-<p>WealthWise Financial Management System</p>
-<p>Java Full Stack Project</p>
-
-</div>
-
-)
-
+      <div className="f-right">
+        <div className="copyright">© {new Date().getFullYear()} WealthWise</div>
+      </div>
+    </footer>
+  );
 }
-
-export default Footer

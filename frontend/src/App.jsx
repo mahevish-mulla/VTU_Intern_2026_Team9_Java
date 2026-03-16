@@ -1,26 +1,20 @@
-import {BrowserRouter,Routes,Route} from "react-router-dom"
-import Login from "./pages/Login"
-import Navbar from "./components/Navbar"
-import Footer from"./components/Footer"
-import Dashbaord from "./pages/Dashboard"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/signup";
+import InvestorPortal from "./pages/InvestorPortal";
 
-function App(){
-
-return(
-
-<BrowserRouter>
-<Navbar/>
-<Routes>
-
-<Route path="/" element={<Login/>}/>
-<Route path="/dashboard" element={<Dashbaord/>}/>
-
-</Routes>
-<Footer/>
-</BrowserRouter>
-
-)
-
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<InvestorPortal />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
