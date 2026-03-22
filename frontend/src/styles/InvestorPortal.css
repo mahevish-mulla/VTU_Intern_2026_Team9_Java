@@ -1,26 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Epilogue:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Epilogue:wght@300;400;500;600&display=swap');
 
-:root {
-  --black: #050805;
-  --black-2: #0b0e0b;
-  --black-3: #111611;
-  --green: #00e676;
-  --green-mid: #00c853;
-  --green-dim: rgba(0, 230, 118, 0.08);
-  --green-border: rgba(0, 230, 118, 0.14);
-  --red: #ff5252;
-  --amber: #ffb300;
-  --blue: #448aff;
-  --muted: #1c2b1c;
-  --text-white: #edf5ed;
-  --text-dim: #6b8c6b;
-  --text-dimmer: #2e422e;
-  --rule: rgba(255, 255, 255, 0.055);
-  --rule-g: rgba(0, 230, 118, 0.09);
+.portal {
+  --black: #080c14;
+  --black-2: #0e1420;
+  --black-3: #131b2a;
+
+  --green: #f5a623;
+  --green-mid: #e09418;
+  --green-dim: rgba(245, 166, 35, 0.09);
+  --green-border: rgba(245, 166, 35, 0.18);
+
+  --red: #f25f5c;
+  --amber: #f5a623;
+  --blue: #5b8dee;
+
+  --muted: #1a2236;
+  --text-white: #eef1f8;
+  --text-dim: #667799;
+  --text-dimmer: #283249;
+  --rule: rgba(255, 255, 255, 0.06);
+  --rule-g: rgba(245, 166, 35, 0.10);
+
   --sb-w: 248px;
-  --font-d: "Fraunces", serif;
-  --font-m: "JetBrains Mono", monospace;
-  --font-b: "Epilogue", sans-serif;
+  --font-d: 'Fraunces', serif;
+  --font-m: 'JetBrains Mono', monospace;
+  --font-b: 'Epilogue', sans-serif;
 }
 
 *,
@@ -36,7 +40,7 @@ body {
   height: 100%;
 }
 
-body {
+.portal {
   background: var(--black);
   color: var(--text-white);
   font-family: var(--font-b);
@@ -52,13 +56,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: #1a2236;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--green-mid);
+  background: #f5a623;
 }
+
 
 .portal {
   display: flex;
@@ -425,6 +430,7 @@ body {
   color: var(--text-white);
 }
 
+
 .holding-list {
   display: flex;
   flex-direction: column;
@@ -556,6 +562,7 @@ body {
   flex-shrink: 0;
 }
 
+
 .browse-bar {
   display: flex;
   gap: 10px;
@@ -665,9 +672,7 @@ body {
   border: 1px solid var(--rule);
   border-radius: 10px;
   padding: 18px 18px 16px;
-  transition:
-    border-color 0.2s,
-    transform 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .fund-card:hover {
@@ -724,7 +729,7 @@ body {
 }
 
 .badge--low {
-  background: rgba(0, 230, 118, 0.1);
+  background: rgba(0, 230, 118, 0.10);
   color: var(--green);
   border: 1px solid rgba(0, 230, 118, 0.22);
 }
@@ -732,13 +737,13 @@ body {
 .badge--moderate {
   background: rgba(255, 179, 0, 0.09);
   color: var(--amber);
-  border: 1px solid rgba(255, 179, 0, 0.2);
+  border: 1px solid rgba(255, 179, 0, 0.20);
 }
 
 .badge--high {
   background: rgba(255, 82, 82, 0.09);
   color: var(--red);
-  border: 1px solid rgba(255, 82, 82, 0.2);
+  border: 1px solid rgba(255, 82, 82, 0.20);
 }
 
 .fund-card__stats {
@@ -775,6 +780,7 @@ body {
   display: flex;
   gap: 7px;
 }
+
 
 .btn {
   display: inline-flex;
@@ -841,6 +847,7 @@ body {
   padding: 7px;
   border-radius: 5px;
 }
+
 
 .inv-summary {
   display: grid;
@@ -975,6 +982,7 @@ body {
   margin-top: 2px;
 }
 
+
 .goal-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -986,9 +994,7 @@ body {
   border: 1px solid var(--rule);
   border-radius: 10px;
   padding: 20px 18px;
-  transition:
-    border-color 0.2s,
-    transform 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
   position: relative;
 }
 
@@ -1095,6 +1101,7 @@ body {
   color: var(--text-dim);
 }
 
+
 .profile-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1194,6 +1201,7 @@ body {
   font-weight: 500;
 }
 
+
 .modal-bg {
   position: fixed;
   inset: 0;
@@ -1220,7 +1228,7 @@ body {
 @keyframes mIn {
   from {
     opacity: 0;
-    transform: scale(0.94) translateY(10px);
+    transform: scale(.94) translateY(10px);
   }
 
   to {

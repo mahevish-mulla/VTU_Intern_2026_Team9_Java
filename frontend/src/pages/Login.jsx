@@ -34,7 +34,13 @@ export default function Login() {
     try {
       const data = await loginUser(email, password);
       localStorage.setItem("token", data.token);
-      navigate("/dashboard");
+      localStorage.setItem("role", data.role);
+      
+      if (data.role === "ADMIN") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {
       setError(err.message);
     }

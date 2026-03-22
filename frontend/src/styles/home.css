@@ -1,26 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Epilogue:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Epilogue:wght@300;400;500;600&display=swap');
 
-:root {
-  --black: #050805;
-  --black-2: #0b0e0b;
-  --black-3: #101410;
-  --green: #00e676;
-  --green-mid: #00c853;
-  --green-soft: rgba(0, 230, 118, 0.1);
-  --green-glow: rgba(0, 230, 118, 0.18);
-  --green-glow2: rgba(0, 230, 118, 0.38);
-  --red: #ff5252;
-  --amber: #ffb300;
-  --muted: #1e2e1e;
-  --text-white: #edf5ed;
-  --text-dim: #6b8c6b;
-  --text-dimmer: #304430;
-  --rule: rgba(255, 255, 255, 0.055);
-  --rule-green: rgba(0, 230, 118, 0.09);
+.home {
+  --black: #080c14;
+  --black-2: #0e1420;
+  --black-3: #131b2a;
+  --green: #f5a623;
+  --green-mid: #e09418;
+  --green-soft: rgba(245, 166, 35, 0.10);
+  --green-glow: rgba(245, 166, 35, 0.18);
+  --green-glow2: rgba(245, 166, 35, 0.38);
+  --red: #f25f5c;
+  --amber: #f5a623;
+  --muted: #1a2236;
+  --text-white: #eef1f8;
+  --text-dim: #667799;
+  --text-dimmer: #283249;
+  --rule: rgba(255, 255, 255, 0.06);
+  --rule-green: rgba(245, 166, 35, 0.09);
 
-  --font-display: "Fraunces", serif;
-  --font-mono: "JetBrains Mono", monospace;
-  --font-body: "Epilogue", sans-serif;
+  --font-display: 'Fraunces', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Epilogue', sans-serif;
 }
 
 *,
@@ -40,16 +40,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  background: #080c14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted);
+  background: #1a2236;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--green-mid);
+  background: #e09418;
 }
 
 .home {
@@ -62,7 +62,7 @@ html {
 }
 
 .home::before {
-  content: "";
+  content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -124,6 +124,7 @@ html {
 }
 
 @keyframes blink {
+
   0%,
   100% {
     opacity: 1;
@@ -135,6 +136,7 @@ html {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
@@ -146,6 +148,7 @@ html {
 }
 
 @keyframes pulseGlow {
+
   0%,
   100% {
     box-shadow: 0 0 14px 3px var(--green-glow);
@@ -169,11 +172,11 @@ html {
 }
 
 .fade-up {
-  animation: fadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fadeUp 0.85s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .delay-1 {
-  animation-delay: 0.1s;
+  animation-delay: 0.10s;
 }
 
 .delay-2 {
@@ -237,10 +240,7 @@ html {
   position: relative;
   overflow: hidden;
   animation: pulseGlow 3.2s ease-in-out infinite;
-  transition:
-    background 0.2s,
-    transform 0.2s,
-    box-shadow 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-primary:hover {
@@ -250,14 +250,10 @@ html {
 }
 
 .btn-primary::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    transparent 60%
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -367,11 +363,7 @@ html {
   width: 540px;
   height: 540px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(0, 200, 83, 0.08) 0%,
-    transparent 68%
-  );
+  background: radial-gradient(circle, rgba(0, 200, 83, 0.08) 0%, transparent 68%);
   pointer-events: none;
 }
 
@@ -380,11 +372,7 @@ html {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(
-    transparent,
-    rgba(0, 230, 118, 0.05),
-    transparent
-  );
+  background: linear-gradient(transparent, rgba(0, 230, 118, 0.05), transparent);
   pointer-events: none;
   animation: scanline 6s linear infinite;
 }
@@ -478,8 +466,7 @@ html {
   border: 1px solid rgba(0, 230, 118, 0.12);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.65),
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.65),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
@@ -567,7 +554,7 @@ html {
 }
 
 .terminal__badge--up {
-  background: rgba(0, 230, 118, 0.1);
+  background: rgba(0, 230, 118, 0.10);
   border: 1px solid rgba(0, 230, 118, 0.22);
   color: var(--green);
 }
@@ -595,7 +582,7 @@ html {
 }
 
 .terminal__tab--active {
-  background: rgba(0, 230, 118, 0.1);
+  background: rgba(0, 230, 118, 0.10);
   color: var(--green);
   border-color: rgba(0, 230, 118, 0.22);
 }
@@ -623,9 +610,7 @@ html {
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.012);
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s;
   cursor: default;
 }
 
@@ -889,12 +874,12 @@ html {
   padding-right: 0;
 }
 
-.what__card:nth-child(4n + 2),
-.what__card:nth-child(4n + 3) {
+.what__card:nth-child(4n+2),
+.what__card:nth-child(4n+3) {
   padding-left: 28px;
 }
 
-.what__card:nth-child(n + 5) {
+.what__card:nth-child(n+5) {
   border-top: 1px solid var(--rule);
   padding-top: 32px;
 }
@@ -923,6 +908,7 @@ html {
   line-height: 1.7;
   font-weight: 300;
 }
+
 .platforms {
   padding: 88px 6vw;
 }
@@ -1007,6 +993,7 @@ html {
   color: var(--green);
 }
 
+
 .cta-strip {
   padding: 72px 6vw 88px;
 }
@@ -1044,11 +1031,7 @@ html {
   width: 600px;
   height: 280px;
   border-radius: 50%;
-  background: radial-gradient(
-    ellipse,
-    rgba(0, 200, 83, 0.09) 0%,
-    transparent 65%
-  );
+  background: radial-gradient(ellipse, rgba(0, 200, 83, 0.09) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -1057,11 +1040,7 @@ html {
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(
-    transparent,
-    rgba(0, 230, 118, 0.045),
-    transparent
-  );
+  background: linear-gradient(transparent, rgba(0, 230, 118, 0.045), transparent);
   pointer-events: none;
   animation: scanline 9s linear infinite;
 }
@@ -1234,7 +1213,9 @@ html {
   color: var(--green);
 }
 
+
 @media (max-width: 1000px) {
+
   .hero__inner,
   .how__steps,
   .what__header,
