@@ -24,7 +24,7 @@ public class MutualFund {
     @Enumerated(EnumType.STRING)
     private RiskLevel riskLevel; // LOW, MEDIUM, HIGH
 
-    @Column(precision = 10, scale = 4)
+    @Column
     private Double currentNav = 0.0;
 
     @Column(unique = true)
