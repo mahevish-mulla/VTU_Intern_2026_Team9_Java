@@ -1,0 +1,72 @@
+.ww-footer {
+  background: var(--black, #080c14);
+  border-top: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
+  padding: 40px 6vw;
+  margin-top: auto;
+  font-family: var(--font-body, 'Epilogue', sans-serif);
+}
+
+.ww-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ww-footer .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-white, #eef1f8);
+  letter-spacing: -0.2px;
+}
+
+.ww-footer .logo em {
+  font-style: normal;
+  color: var(--green, #00e676);
+}
+
+.ww-footer .muted {
+  color: var(--text-dim, #667799);
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 300;
+}
+
+.ww-footer .f-links {
+  display: flex;
+  gap: 24px;
+}
+
+.ww-footer .f-links a {
+  color: var(--text-dim, #667799);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.ww-footer .f-links a:hover {
+  color: var(--green, #00e676);
+}
+
+.ww-footer .f-right {
+  color: var(--text-dim, #667799);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+@media(max-width: 768px) {
+  .ww-footer-inner {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+}
