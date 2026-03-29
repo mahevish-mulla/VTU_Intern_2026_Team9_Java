@@ -32,4 +32,12 @@ public class AdminController {
     public ResponseEntity<MutualFund> addMutualFund(@RequestBody FundRequest req) {
         return ResponseEntity.ok(adminService.addMutualFund(req));
     }
+
+    // Add this to AdminController.java
+    @PostMapping("/funds/auto/{schemeCode}")
+    public ResponseEntity<MutualFund> autoAddFund(
+            @PathVariable Integer schemeCode,
+            @RequestParam MutualFund.RiskLevel risk) {
+        return ResponseEntity.ok(adminService.autoAddFundByCode(schemeCode, risk));
+    }
 }
