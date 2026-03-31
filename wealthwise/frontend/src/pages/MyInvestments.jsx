@@ -1,22 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Ico } from "../utils/icons";
-import { fmtFull, getInvested, getCurrentVal } from "../utils/helpers";
+import { fmtFull } from "../utils/helpers";
+import API from "../services/api";
 
 export default function MyInvestments({ investments, funds, onDelete }) {
   const [filter, setFilter] = useState("All");
+  const [liveNavs, setLiveNavs] = useState({});
 
-  const totalInvested = investments.reduce((a, inv) => a + getInvested(inv), 0);
-  const currentValue = investments.reduce(
-    (a, inv) => a + getCurrentVal(inv, funds),
-    0,
+  useEffect(() => {
+    const fetchNavs = async () => {
+      const navMap = {};
+
+      for (let inv of investments) {
+        const schemeCode = inv.mutualFund?.schemeCode;
+
+        if (schemeCode && !navMap[schemeCode]) {
+          try {
+            const res = await API.get(`/api/funds/${schemeCode}/live`);
+            navMap[schemeCode] = Number(res.data.data.nav);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      }
+
+      setLiveNavs(navMap);
+    };
+
+    if (investments.length > 0) {
+      fetchNavs();
+    }
+  }, [investments]);
+
+  const totalInvested = investments.reduce(
+    (a, inv) => a + Number(inv.amount),
+    0
   );
+
+  const currentValue = investments.reduce((sum, inv) => {
+    const fund = funds.find(f => f.id === inv.mutualFund?.fund_id);
+    if (!fund) return sum;
+
+    const nav = liveNavs[fund.schemeCode] || fund.nav;
+
+    return sum + (Number(inv.units) * nav);
+  }, 0);
+
   const totalReturn = currentValue - totalInvested;
-  const returnPct = totalInvested > 0 ? (totalReturn / totalInvested) * 100 : 0;
+  const returnPct =
+    totalInvested > 0 ? (totalReturn / totalInvested) * 100 : 0;
 
   const filtered =
     filter === "All"
       ? investments
-      : investments.filter((i) => i.type === filter.toLowerCase());
+      : investments.filter((i) =>
+        filter === "SIP"
+          ? i.type === "SIP"
+          : i.type === "LUMP_SUM"
+      );
 
   return (
     <div className="page">
@@ -30,11 +71,7 @@ export default function MyInvestments({ investments, funds, onDelete }) {
       <div className="inv-summary">
         {[
           { lbl: "Total Invested", val: fmtFull(totalInvested), cls: "" },
-          {
-            lbl: "Current Value",
-            val: fmtFull(Math.round(currentValue)),
-            cls: "",
-          },
+          { lbl: "Current Value", val: fmtFull(currentValue), cls: "" },
           {
             lbl: "Total Returns",
             val: `${totalReturn >= 0 ? "+" : ""}${fmtFull(Math.abs(totalReturn))} (${totalReturn >= 0 ? "+" : ""}${returnPct.toFixed(2)}%)`,
@@ -45,9 +82,7 @@ export default function MyInvestments({ investments, funds, onDelete }) {
             <div className="stat-card__hd">
               <span className="stat-card__lbl">{s.lbl}</span>
             </div>
-            <div
-              className={`stat-card__val${s.cls ? ` stat-card__val${s.cls}` : ""}`}
-            >
+            <div className={`stat-card__val${s.cls ? ` stat-card__val${s.cls}` : ""}`}>
               {s.val}
             </div>
           </div>
@@ -75,72 +110,56 @@ export default function MyInvestments({ investments, funds, onDelete }) {
       ) : (
         <div className="inv-list">
           {filtered.map((inv) => {
-            const fund = funds.find((f) => f.id === inv.fundId);
+            const fund = funds.find(
+              (f) => f.id === inv.mutualFund?.fund_id
+            );
+
             if (!fund) return null;
-            const val = getCurrentVal(inv, funds);
-            const invested = getInvested(inv);
-            const ret = val - invested;
-            const retPct = (ret / invested) * 100;
+
+            const nav = liveNavs[fund.schemeCode] || fund.nav;
+
+            const invested = Number(inv.amount);
+            const currentVal = Number(inv.units) * nav;
+            const ret = currentVal - invested;
+            const pct = (ret / invested) * 100;
 
             return (
               <div className="inv-card" key={inv.id}>
                 <div>
                   <div className="inv-card__name">{fund.name}</div>
+
                   <div className="inv-card__tags">
-                    <span className={`inv-tag inv-tag--${inv.type}`}>
-                      {inv.type === "sip" ? "SIP" : "Lumpsum"}
+                    <span className={`inv-tag inv-tag--${inv.type === "SIP" ? "sip" : "lumpsum"}`}>
+                      {inv.type === "SIP" ? "SIP" : "Lumpsum"}
                     </span>
+
                     <span className="inv-tag inv-tag--cat">
                       {fund.category}
                     </span>
-                    {inv.type === "sip" && (
-                      <span
-                        style={{
-                          fontFamily: "var(--font-m)",
-                          fontSize: 10,
-                          color: "var(--text-dim)",
-                        }}
-                      >
-                        ₹{inv.monthlyAmount.toLocaleString("en-IN")}/mo ·{" "}
-                        {inv.instalments} instalments
-                      </span>
-                    )}
                   </div>
                 </div>
 
                 <div className="inv-col">
                   <div className="inv-col-lbl">Invested</div>
                   <div className="inv-col-val">{fmtFull(invested)}</div>
-                  <div className="inv-col-sub">
-                    {inv.units.toFixed(3)} units
-                  </div>
                 </div>
 
                 <div className="inv-col">
                   <div className="inv-col-lbl">Current Value</div>
-                  <div className="inv-col-val">{fmtFull(val)}</div>
-                  <div className="inv-col-sub">
-                    NAV ₹{fund.nav.toLocaleString("en-IN")}
-                  </div>
+                  <div className="inv-col-val">{fmtFull(currentVal)}</div>
                 </div>
 
                 <div className="inv-col">
-                  <div className="inv-col-lbl">Returns</div>
-                  <div
-                    className={`inv-col-val${ret >= 0 ? " inv-col-val--g" : " inv-col-val--r"}`}
-                  >
-                    {ret >= 0 ? "+" : ""}
-                    {fmtFull(Math.abs(ret))}
+                  <div className={`inv-col-val${ret >= 0 ? " inv-col-val--g" : " inv-col-val--r"}`}>
+                    {ret >= 0 ? "+" : ""}₹{Math.abs(ret).toFixed(2)}
                   </div>
                   <div className="inv-col-sub">
-                    {ret >= 0 ? "+" : ""}
-                    {retPct.toFixed(2)}%
+                    {ret >= 0 ? "+" : ""}{pct.toFixed(3)}%
                   </div>
                 </div>
 
                 <button
                   className="btn btn--danger btn--icon"
-                  title="Remove"
                   onClick={() => onDelete(inv.id)}
                 >
                   <Ico.Trash />

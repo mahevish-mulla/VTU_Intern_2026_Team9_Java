@@ -11,39 +11,19 @@ export default function AddInvestmentModal({ fund, onClose, onAdd }) {
     : 0;
 
   function submit() {
-    const amt = parseFloat(amount);
-    if (!amt || amt <= 0) return;
+    const amt = parseFloat(amount.trim());
 
-    const nextSIP = (() => {
-      const d = new Date(date);
-      d.setMonth(d.getMonth() + 1);
-      return d.toISOString().split("T")[0];
-    })();
-
-    if (tab === "sip") {
-      onAdd({
-        id: Date.now(),
-        fundId: fund.id,
-        type: "sip",
-        monthlyAmount: amt,
-        instalments: 1,
-        totalInvested: amt,
-        avgNAV: fund.nav,
-        units,
-        startDate: date,
-        nextSIP,
-      });
-    } else {
-      onAdd({
-        id: Date.now(),
-        fundId: fund.id,
-        type: "lumpsum",
-        amount: amt,
-        buyNAV: fund.nav,
-        units,
-        date,
-      });
+    if (isNaN(amt) || amt <= 0) {
+      alert("Enter valid amount");
+      return;
     }
+
+    onAdd({
+      fundId: fund.id,
+      amount: amt,
+      type: tab === "sip" ? "SIP" : "LUMP_SUM"
+    });
+
     onClose();
   }
 
@@ -59,6 +39,7 @@ export default function AddInvestmentModal({ fund, onClose, onAdd }) {
             ✕
           </button>
         </div>
+
         <p className="modal__sub">
           {fund.name} · NAV {fmtFull(fund.nav)}
         </p>
@@ -110,11 +91,8 @@ export default function AddInvestmentModal({ fund, onClose, onAdd }) {
         )}
 
         <div className="modal__footer">
-          <button className="btn btn--ghost" onClick={onClose}>
-            Cancel
-          </button>
           <button className="btn btn--primary btn--full" onClick={submit}>
-            Add to Portfolio →
+            Add Investment
           </button>
         </div>
       </div>

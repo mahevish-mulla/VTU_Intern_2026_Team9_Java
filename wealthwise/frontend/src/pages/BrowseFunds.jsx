@@ -1,36 +1,71 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import AddInvestmentModal from "../components/AddInvestmentModal";
 import { CATEGORIES } from "../utils/data";
 import { Ico } from "../utils/icons";
+import API from "../services/api";
 
 export default function BrowseFunds({
-  funds,
   investments,
-  onAddInvestment,
   showToast,
+  onAddInvestment
 }) {
   const [query, setQuery] = useState("");
   const [risk, setRisk] = useState("All");
   const [cat, setCat] = useState("All");
   const [modal, setModal] = useState(null);
+  const [funds, setFunds] = useState([]);
 
-  const ownedFundIds = new Set(investments.map((i) => i.fundId));
+  useEffect(() => {
+    API.get("/api/funds/browse")
+      .then(res => setFunds(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const mappedFunds = funds.map(f => ({
+    id: f.fund_id,
+    name: f.fundName,
+    house: f.amc?.amcName || "Unknown",
+    category: f.category,
+    risk: f.riskLevel,
+    nav: Number(f.currentNav),
+    schemeCode: f.schemeCode
+  }));
+
+  const ownedFundIds = new Set(
+    investments.map((i) => i.mutualFund?.fund_id)
+  );
 
   const filtered = useMemo(() => {
-    return funds.filter((f) => {
+    return mappedFunds.filter((f) => {
       const matchQ =
         f.name.toLowerCase().includes(query.toLowerCase()) ||
         f.house.toLowerCase().includes(query.toLowerCase());
+
       const matchR =
         risk === "All" || f.risk.toUpperCase() === risk.toUpperCase();
+
       const matchC = cat === "All" || f.category === cat;
+
       return matchQ && matchR && matchC;
     });
-  }, [funds, query, risk, cat]);
+  }, [mappedFunds, query, risk, cat]);
 
   function handleAdd(inv) {
-    onAddInvestment(inv);
-    showToast("Added to your portfolio!");
+    const userId = localStorage.getItem("userId") || 1;
+
+    API.post("/api/funds/invest", {
+      userId: Number(userId),
+      fundId: inv.fundId,
+      amount: inv.amount,
+      type: inv.type
+    })
+      .then(res => {
+        showToast("Added to your portfolio!");
+        onAddInvestment(res.data);
+      })
+      .catch(err => {
+        console.error("FULL ERROR:", err.response?.data);
+      });
   }
 
   return (
@@ -54,6 +89,7 @@ export default function BrowseFunds({
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
+
         <select
           className="risk-filter"
           value={risk}
@@ -61,7 +97,7 @@ export default function BrowseFunds({
         >
           <option value="All">All Risk</option>
           <option value="LOW">Low Risk</option>
-          <option value="MODERATE">Moderate Risk</option>
+          <option value="MEDIUM">Moderate Risk</option>
           <option value="HIGH">High Risk</option>
         </select>
       </div>
@@ -78,69 +114,51 @@ export default function BrowseFunds({
         ))}
       </div>
 
-      {filtered.length === 0 ? (
-        <div className="empty">
-          <div className="empty__ico">◈</div>
-          <p className="empty__title">No funds found</p>
-          <p className="empty__sub">Try a different search or filter</p>
-        </div>
-      ) : (
-        <div className="fund-grid">
-          {filtered.map((f) => (
-            <div className="fund-card" key={f.id}>
-              <div className="fund-card__top">
-                <div>
-                  <div className="fund-card__name">{f.name}</div>
-                  <div className="fund-card__house">{f.house}</div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                    gap: 4,
-                  }}
-                >
-                  <span className={`badge badge--${f.risk.toLowerCase()}`}>
-                    {f.risk}
-                  </span>
-                  {ownedFundIds.has(f.id) && (
-                    <span className="fund-card__owned-badge">Invested</span>
-                  )}
-                </div>
+      <div className="fund-grid">
+        {filtered.map((f) => (
+          <div className="fund-card" key={f.id}>
+            <div className="fund-card__top">
+              <div>
+                <div className="fund-card__name">{f.name}</div>
+                <div className="fund-card__house">{f.house}</div>
               </div>
 
-              <div className="fund-card__stats">
-                <div>
-                  <div className="fund-stat-lbl">Category</div>
-                  <div className="fund-stat-val">{f.category}</div>
-                </div>
-                <div>
-                  <div className="fund-stat-lbl">NAV</div>
-                  <div className="fund-stat-val">
-                    ₹{f.nav.toLocaleString("en-IN")}
-                  </div>
-                </div>
-                <div>
-                  <div className="fund-stat-lbl">1Y Return</div>
-                  <div className="fund-stat-val fund-stat-val--g">
-                    +{f.ret1y}%
-                  </div>
-                </div>
-              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+                <span className={`badge badge--${f.risk.toLowerCase()}`}>
+                  {f.risk}
+                </span>
 
-              <div className="fund-card__btns">
-                <button
-                  className="btn btn--primary btn--sm btn--full"
-                  onClick={() => setModal(f)}
-                >
-                  + Add SIP / Lumpsum
-                </button>
+                {ownedFundIds.has(f.id) && (
+                  <span className="fund-card__owned-badge">Invested</span>
+                )}
               </div>
             </div>
-          ))}
-        </div>
-      )}
+
+            <div className="fund-card__stats">
+              <div>
+                <div className="fund-stat-lbl">Category</div>
+                <div className="fund-stat-val">{f.category}</div>
+              </div>
+
+              <div>
+                <div className="fund-stat-lbl">NAV</div>
+                <div className="fund-stat-val">
+                  ₹{f.nav.toLocaleString("en-IN")}
+                </div>
+              </div>
+            </div>
+
+            <div className="fund-card__btns">
+              <button
+                className="btn btn--primary btn--sm btn--full"
+                onClick={() => setModal(f)}
+              >
+                + Add SIP / Lumpsum
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
       {modal && (
         <AddInvestmentModal

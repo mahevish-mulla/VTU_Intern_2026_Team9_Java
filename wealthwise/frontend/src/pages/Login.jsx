@@ -33,8 +33,10 @@ export default function Login() {
 
     try {
       const data = await loginUser(email, password);
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
+      localStorage.setItem("userId", data.userId);
 
       if (data.role === "ADMIN") {
         navigate("/admin");
@@ -117,20 +119,15 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} noValidate>
             <div className="auth__grp">
-              <label className="auth__lbl" htmlFor="login-email">
-                Email
-              </label>
+              <label className="auth__lbl">Email</label>
               <input
-                id="login-email"
                 className={`auth__inp${errors.email ? " auth__inp--err" : ""}`}
                 type="email"
-                placeholder="you@example.com"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setErrors((x) => ({ ...x, email: "" }));
                 }}
-                autoComplete="email"
               />
               {errors.email && (
                 <span className="auth__err-msg">{errors.email}</span>
@@ -138,22 +135,16 @@ export default function Login() {
             </div>
 
             <div className="auth__grp">
-              <label className="auth__lbl" htmlFor="login-pw">
-                Password
-              </label>
+              <label className="auth__lbl">Password</label>
               <div className="auth__inp-wrap">
                 <input
-                  id="login-pw"
                   className={`auth__inp${errors.password ? " auth__inp--err" : ""}`}
                   type={showPw ? "text" : "password"}
-                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                     setErrors((x) => ({ ...x, password: "" }));
                   }}
-                  autoComplete="current-password"
-                  style={{ paddingRight: 56 }}
                 />
                 <button
                   type="button"
@@ -167,20 +158,6 @@ export default function Login() {
                 <span className="auth__err-msg">{errors.password}</span>
               )}
             </div>
-            <p style={{ textAlign: "right", marginTop: 6 }}>
-              <button
-                type="button"
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#00e676",
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate("/forgot-password")}
-              >
-                Forgot Password?
-              </button>
-            </p>
 
             <button className="auth__btn" type="submit" disabled={loading}>
               {loading ? "Signing in…" : "Sign In →"}
