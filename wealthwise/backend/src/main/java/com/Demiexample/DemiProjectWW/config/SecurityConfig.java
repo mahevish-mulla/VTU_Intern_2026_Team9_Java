@@ -3,6 +3,7 @@ package com.Demiexample.DemiProjectWW.config;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -18,6 +19,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.Demiexample.DemiProjectWW.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpMethod;
+
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +37,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfig()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Public Endpoints
                         .requestMatchers(
                                 "/api/auth/login",
@@ -74,7 +78,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfig() {
         CorsConfiguration config = new CorsConfiguration();
         // Allow the React frontend URL
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedOrigins(List.of("http://localhost:3000"));
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
