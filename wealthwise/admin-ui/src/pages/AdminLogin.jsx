@@ -25,11 +25,11 @@ export default function AdminLogin() {
       {/* LEFT SIDE */}
       <div className="left">
         <h1>
-          All your Investments in <br />
-          One <span>Organized</span> dashboard
+          Centralized Dashboard <br />
+          for <span>Admin</span> Management
         </h1>
         <p>
-          Track your mutual funds with live NAV and analytics.
+          Manage AMCs, mutual funds, and platform operations efficiently.
         </p>
       </div>
 
