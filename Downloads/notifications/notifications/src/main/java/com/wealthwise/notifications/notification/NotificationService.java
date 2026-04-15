@@ -46,4 +46,18 @@ public class NotificationService {
     public void sendDailySipReminders() {
         System.out.println("Checking SIP reminders...");
     }
+ // Admin broadcasts message to ALL users
+    public void broadcastToAllUsers(String message, String type) {
+        Notification n = new Notification();
+        n.setUserId(0L);  // 0 means broadcast to all
+        n.setType(type);
+        n.setMessage(message);
+        notificationRepository.save(n);
+        System.out.println("Broadcast saved: " + message);
+    }
+
+    // Get all broadcast notifications (userId = 0)
+    public List<Notification> getAllBroadcasts() {
+        return notificationRepository.findByUserId(0L);
+    }
 }

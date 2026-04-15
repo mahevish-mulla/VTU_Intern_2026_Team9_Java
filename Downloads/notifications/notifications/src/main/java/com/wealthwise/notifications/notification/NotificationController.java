@@ -39,4 +39,24 @@ public class NotificationController {
         );
         return ResponseEntity.ok("Alert sent!");
     }
+ // POST: Admin broadcasts to ALL users
+ // URL: http://localhost:8080/api/notifications/broadcast
+ @PostMapping("/broadcast")
+ public ResponseEntity<String> broadcastToAll(
+         @RequestBody BroadcastRequest request) {
+     notificationService.broadcastToAllUsers(
+         request.getMessage(),
+         request.getType()
+     );
+     return ResponseEntity.ok("Broadcast sent to all users!");
+ }
+
+ // GET: Get all broadcast notifications
+ // URL: http://localhost:8080/api/notifications/broadcasts
+ @GetMapping("/broadcasts")
+ public ResponseEntity<List<Notification>> getBroadcasts() {
+     return ResponseEntity.ok(
+         notificationService.getAllBroadcasts()
+     );
+ }
 }
