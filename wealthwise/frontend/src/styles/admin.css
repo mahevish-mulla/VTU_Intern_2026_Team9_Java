@@ -1,0 +1,196 @@
+/* ─── Admin-specific overrides ─────────────────── */
+/* The admin portal now uses InvestorPortal.css for layout.
+   This file only contains admin-specific component styles. */
+
+/* ─── Form Row ──────────────────────────────────── */
+.admin__form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin__input {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: var(--text-white, #eef1f8);
+    font-family: var(--font-b, 'Epilogue', sans-serif);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.18s, background 0.18s;
+}
+
+.admin__input:focus {
+    border-color: rgba(245, 166, 35, 0.4);
+    background: rgba(245, 166, 35, 0.04);
+}
+
+.admin__input::placeholder {
+    color: var(--text-dim, #667799);
+}
+
+.admin__select {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: var(--text-white, #eef1f8);
+    font-family: var(--font-b, 'Epilogue', sans-serif);
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    min-width: 130px;
+    transition: border-color 0.18s;
+}
+
+.admin__select:focus {
+    border-color: rgba(245, 166, 35, 0.4);
+}
+
+.admin__select option {
+    background: #0e1420;
+    color: #eef1f8;
+}
+
+.admin__btn {
+    background: var(--green, #f5a623);
+    color: #080c14;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-family: var(--font-b, 'Epilogue', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+
+.admin__btn:hover {
+    background: #f0b84a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(245, 166, 35, 0.25);
+}
+
+.admin__btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ─── Table ─────────────────────────────────────── */
+.admin__table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
+    margin-top: 8px;
+}
+
+.admin__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: auto;
+}
+
+.admin__table thead {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.admin__table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--font-m, 'JetBrains Mono', monospace);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-dim, #667799);
+    border-bottom: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
+    white-space: nowrap;
+}
+
+.admin__table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+    color: var(--text-dim, #667799);
+}
+
+.admin__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin__table tbody tr {
+    transition: background 0.12s;
+}
+
+.admin__table tbody tr:hover {
+    background: rgba(245, 166, 35, 0.02);
+}
+
+/* specific column styles */
+.admin__td-num {
+    color: var(--text-dimmer, #283249);
+    font-family: var(--font-m);
+    font-size: 11px;
+    width: 40px;
+}
+
+.admin__td-name {
+    color: var(--text-white, #eef1f8);
+    font-weight: 500;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin__td-nav {
+    color: var(--green, #f5a623);
+    font-family: var(--font-m);
+    font-weight: 600;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.admin__td-code {
+    color: var(--text-dim, #667799);
+    font-family: var(--font-m);
+    font-size: 11px;
+}
+
+/* ─── Badge ─────────────────────────────────────── */
+.admin__badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* ─── Delete Button ─────────────────────────────── */
+.admin__delete-btn {
+    background: rgba(255, 82, 82, 0.08);
+    color: #ff5252;
+    border: 1px solid rgba(255, 82, 82, 0.2);
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-family: var(--font-b);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.admin__delete-btn:hover {
+    background: rgba(255, 82, 82, 0.15);
+    border-color: rgba(255, 82, 82, 0.45);
+}

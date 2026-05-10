@@ -1,0 +1,496 @@
+/* ═══════════════════════════════════════════════════════
+   RETURNS ESTIMATOR — Styles
+   Uses portal design tokens (--black, --green, --rule, etc.)
+   ═══════════════════════════════════════════════════════ */
+
+.estimator-page {
+  padding: 36px 40px;
+}
+
+/* ── Grid Layout ─────────────────────────────────────── */
+.est-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+@media (max-width: 960px) {
+  .est-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.est-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Card base ───────────────────────────────────────── */
+.est-card {
+  background: var(--black-2);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+/* ── Mode Tabs ───────────────────────────────────────── */
+.est-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.est-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--font-b);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.est-tab:hover {
+  color: var(--text-white);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.est-tab--active {
+  color: var(--green);
+  border-color: var(--green-border);
+  background: var(--green-dim);
+}
+
+.est-tab--active:hover {
+  color: var(--green);
+  border-color: var(--green-border);
+  background: var(--green-dim);
+}
+
+.est-tab__icon {
+  font-size: 16px;
+}
+
+/* ── Form Fields ─────────────────────────────────────── */
+.est-field {
+  margin-bottom: 24px;
+}
+
+.est-field__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.est-field__label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.2px;
+  margin-bottom: 10px;
+}
+
+.est-field__head .est-field__label {
+  margin-bottom: 0;
+}
+
+.est-field__badge {
+  background: var(--green-dim);
+  border: 1px solid var(--green-border);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-family: var(--font-m);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.3px;
+}
+
+/* Amount input */
+.est-field__input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--black-3);
+  border: 1.5px solid var(--rule);
+  border-radius: 10px;
+  padding: 0 16px;
+  transition: border-color 0.2s;
+}
+
+.est-field__input-wrap:focus-within {
+  border-color: var(--green-border);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.08);
+}
+
+.est-field__prefix {
+  font-family: var(--font-d);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  margin-right: 8px;
+  user-select: none;
+}
+
+.est-field__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-white);
+  font-family: var(--font-m);
+  font-size: 22px;
+  font-weight: 500;
+  padding: 14px 0;
+  width: 100%;
+  letter-spacing: -0.3px;
+}
+
+.est-field__input::placeholder {
+  color: var(--text-dimmer);
+}
+
+/* Remove number input spinners */
+.est-field__input::-webkit-outer-spin-button,
+.est-field__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.est-field__input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Slider row */
+.est-field__slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.est-field__range-label {
+  font-family: var(--font-m);
+  font-size: 10px;
+  color: var(--text-dimmer);
+  flex-shrink: 0;
+  min-width: 36px;
+}
+
+/* Error */
+.est-field__error {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--red);
+  padding: 6px 10px;
+  background: rgba(242, 95, 92, 0.08);
+  border: 1px solid rgba(242, 95, 92, 0.15);
+  border-radius: 6px;
+}
+
+/* ── Custom Slider ───────────────────────────────────── */
+.est-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(to right,
+      var(--green) 0%,
+      var(--green) var(--fill, 50%),
+      var(--muted) var(--fill, 50%),
+      var(--muted) 100%);
+  transition: background 0.1s;
+}
+
+.est-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--black-2);
+  box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.est-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.2), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.est-slider::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+.est-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 3px solid var(--black-2);
+  box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.est-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--muted);
+}
+
+.est-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--green);
+}
+
+/* ── Result Summary Cards ────────────────────────────── */
+.est-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.est-result-card {
+  background: var(--black-2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.est-result-card--total {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.06) 0%, rgba(16, 185, 129, 0.04) 100%);
+  border-color: var(--green-border);
+  text-align: center;
+  padding: 22px 20px;
+}
+
+.est-result-card__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.est-result-card--total .est-result-card__label {
+  justify-content: center;
+}
+
+.est-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.est-result-card__value {
+  font-family: var(--font-m);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-white);
+  letter-spacing: -0.3px;
+}
+
+.est-result-card__value--big {
+  font-family: var(--font-d);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.5px;
+}
+
+.est-result-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Chart Section ───────────────────────────────────── */
+.est-chart-header {
+  margin-bottom: 20px;
+}
+
+.est-chart-title {
+  font-family: var(--font-d);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 4px;
+}
+
+.est-chart-sub {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.est-chart-area {
+  height: 280px;
+  margin-bottom: 16px;
+}
+
+/* ── Chart Legend ────────────────────────────────────── */
+.est-legend {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.est-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.est-legend__color {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ── Progress Bar ────────────────────────────────────── */
+.est-progress-wrap {
+  margin-bottom: 24px;
+}
+
+.est-progress {
+  height: 10px;
+  background: var(--muted);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+}
+
+.est-progress__bar {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.est-progress__bar--invested {
+  background: linear-gradient(90deg, #f5a623, #e09418);
+  border-radius: 5px 0 0 5px;
+}
+
+.est-progress__bar--returns {
+  background: linear-gradient(90deg, #5b8af5, #4a7ae5);
+  border-radius: 0 5px 5px 0;
+}
+
+/* ── Goal CTA Button ─────────────────────────────────── */
+.est-goal-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border: 1.5px solid var(--green-border);
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green-dim) 0%, rgba(245, 166, 35, 0.03) 100%);
+  color: var(--green);
+  font-family: var(--font-b);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
+}
+
+.est-goal-btn:hover {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.15) 0%, rgba(245, 166, 35, 0.06) 100%);
+  border-color: var(--green);
+  box-shadow: 0 4px 20px rgba(245, 166, 35, 0.12);
+  transform: translateY(-1px);
+}
+
+.est-goal-btn:active {
+  transform: translateY(0);
+}
+
+.est-goal-btn__icon {
+  font-size: 18px;
+}
+
+/* ── Tooltip ─────────────────────────────────────────── */
+.est-tooltip {
+  background: var(--black-2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  min-width: 180px;
+}
+
+.est-tooltip__title {
+  font-family: var(--font-d);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.est-tooltip__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+  padding: 3px 0;
+}
+
+.est-tooltip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.est-tooltip__val {
+  margin-left: auto;
+  font-family: var(--font-m);
+  font-weight: 500;
+  color: var(--text-white);
+  font-size: 11.5px;
+}
+
+.est-tooltip__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--green);
+}
