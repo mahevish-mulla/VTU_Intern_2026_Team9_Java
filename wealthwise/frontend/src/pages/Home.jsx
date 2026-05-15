@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Home.css";
+import "../styles/home.css";
 
 function Sparkline({ data, up, width = 72, height = 28 }) {
   const max = Math.max(...data);

@@ -101,7 +101,12 @@ export default function AdminDashboard() {
       fetchFunds();
     } catch (err) {
       setIsAddError(true);
-      setAddMessage(err.response?.data?.error || "Failed to add fund");
+      const errorMsg = err.response?.data?.error || err.response?.data?.message || "";
+      if (errorMsg.toLowerCase().includes("duplicate") || errorMsg.toLowerCase().includes("already exists")) {
+        setAddMessage("⚠ Fund already listed in the database");
+      } else {
+        setAddMessage(errorMsg || "Failed to add fund");
+      }
     } finally {
       setLoading(false);
     }

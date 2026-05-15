@@ -1,0 +1,81 @@
+version: '3.9'
+
+services:
+
+  # ── MySQL Database ────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: wealthwise-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: wealthwise_db1
+    ports:
+      - "3307:3306"          # 3307 on host → avoids conflict with local MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - wealthwise-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ── Spring Boot Backend ───────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend          # folder containing your Spring Boot project
+      dockerfile: Dockerfile
+    container_name: wealthwise-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # Override datasource to point to the mysql container (not localhost)
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/wealthwise_db1?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      # JWT
+      APP_JWT_SECRET: ${JWT_SECRET:-wealthwise_secret_key_2026_minimum_32_chars_long}
+      APP_JWT_EXPIRATION: 86400000
+      # Mail
+      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
+      # Frontend CORS origin
+      APP_FRONTEND_URL: http://localhost:3000
+    ports:
+      - "8081:8080"
+    networks:
+      - wealthwise-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # ── React Frontend ────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend         # folder containing your React/Vite project
+      dockerfile: Dockerfile
+    container_name: wealthwise-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    networks:
+      - wealthwise-net
+
+# ── Volumes & Networks ──────────────────────────────────────────────────────────
+volumes:
+  mysql_data:
+
+networks:
+  wealthwise-net:
+    driver: bridge

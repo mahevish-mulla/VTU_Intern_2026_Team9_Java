@@ -361,11 +361,16 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: margin-left 0.25s cubic-bezier(.4, 0, .2, 1);
+  transition: margin-left 0.25s cubic-bezier(.4, 0, .2, 1),
+              margin-right 0.35s cubic-bezier(.4, 0, .2, 1);
 }
 
 .portal--collapsed .portal__main {
   margin-left: var(--sb-w-collapsed);
+}
+
+.portal--chatbot-open .portal__main {
+  margin-right: 400px;
 }
 
 .portal__content {

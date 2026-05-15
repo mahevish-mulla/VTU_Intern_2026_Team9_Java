@@ -59,6 +59,7 @@ public class SecurityConfig {
                         "/api/auth/reset-password",
                         "/api/auth/admin/login"
                 ).permitAll()
+                .requestMatchers("/api/chat/**").authenticated()
                 .requestMatchers(
                     "/api/admin/**").hasRole("ADMIN")
                 .requestMatchers(
@@ -97,7 +98,10 @@ public class SecurityConfig {
         CorsConfiguration config =
             new CorsConfiguration();
         config.setAllowedOrigins(
-            List.of("http://localhost:5173"));
+        	    List.of(
+        	        "http://localhost:5173",   // local dev (Vite)
+        	        "http://localhost:3000"    // Docker frontend
+        	    ));
         config.setAllowedMethods(List.of(
             "GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));

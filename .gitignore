@@ -1,0 +1,9 @@
+.settings/
+.project
+.classpath
+.idea/
+wealthwise/backend/bin/
+wealthwise/backend/target/
+wealthwise/.env
+wealthwise/wealthwise_backup.sql
+node_modules/

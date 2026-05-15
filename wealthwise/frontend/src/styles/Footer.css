@@ -1,4 +1,4 @@
-.ww-footer {
+/* .ww-footer {
   background: var(--black, #080c14);
   border-top: 1px solid var(--rule, rgba(255, 255, 255, 0.06));
   padding: 40px 6vw;
@@ -68,5 +68,182 @@
     flex-direction: column;
     text-align: center;
     justify-content: center;
+  }
+} */
+
+/* ════════════════════════════════
+   WealthWise — Footer Styles
+   ════════════════════════════════ */
+
+.ww-footer {
+  background: #0d1117;
+  border-top: 1px solid rgba(245, 158, 11, 0.15);
+  padding: 3rem 2rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Grid Layout ── */
+
+.ww-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Brand Column ── */
+
+.ww-footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.ww-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ww-footer-logo span {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.ww-footer-logo em {
+  color: #f59e0b;
+  font-style: normal;
+}
+
+.ww-footer-tagline {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0 0 20px;
+  max-width: 240px;
+}
+
+/* ── Social Buttons ── */
+
+.ww-footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.ww-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.ww-social-btn:hover {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+/* ── Link Columns ── */
+
+.ww-footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.ww-footer-col-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+
+.ww-footer-link {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-size: 13px;
+  transition: color 0.15s ease;
+  width: fit-content;
+}
+
+.ww-footer-link:hover {
+  color: #f59e0b;
+}
+
+/* ── Bottom Bar ── */
+
+.ww-footer-bottom {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ww-footer-copy {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+}
+
+.ww-footer-version {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 900px) {
+  .ww-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ww-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .ww-footer-tagline {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .ww-footer {
+    padding: 2.5rem 1.25rem 1.25rem;
+  }
+
+  .ww-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .ww-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

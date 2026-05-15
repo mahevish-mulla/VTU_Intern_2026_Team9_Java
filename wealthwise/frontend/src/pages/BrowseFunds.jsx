@@ -72,9 +72,9 @@ export default function BrowseFunds({
   return (
     <div className="page">
       <div className="page__head">
-        <h1 className="page__title">Browse Funds</h1>
-        <p className="page__sub">
-          Explore mutual funds and add them to your portfolio
+        <h1 className="page__title">Explore <em>Funds</em></h1>
+        <p className="page__sub" style={{ marginTop: "6px" }}>
+          Curated mutual funds — filter, compare, and invest in minutes
         </p>
       </div>
 

@@ -61,8 +61,8 @@ export default function Notifications({ onRead }) {
         <div className="page">
             <div className="page__head" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                    <h1 className="page__title">Notifications</h1>
-                    <p className="page__sub">Stay updated on your investments</p>
+                    <h1 className="page__title">Activity <em>Feed</em></h1>
+                    <p className="page__sub" style={{ marginTop: "6px" }}>Real-time alerts and updates on your portfolio</p>
                 </div>
                 {notifications.some(n => !n.read) && (
                     <button

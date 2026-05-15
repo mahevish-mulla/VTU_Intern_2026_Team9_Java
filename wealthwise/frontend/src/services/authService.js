@@ -1,4 +1,6 @@
-const API_BASE = "http://localhost:8080/api/auth";
+// const API_BASE = "http://localhost:8080/api/auth";
+// AFTER
+const API_BASE = "/api/auth";
 
 async function handleResponse(res) {
   const text = await res.text();
@@ -15,8 +17,8 @@ async function handleResponse(res) {
   if (!res.ok) {
     throw new Error(
       (data && (data.message || data.error)) ||
-        (typeof data === "string" ? data : null) ||
-        "Request failed",
+      (typeof data === "string" ? data : null) ||
+      "Request failed",
     );
   }
 

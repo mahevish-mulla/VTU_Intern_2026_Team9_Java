@@ -124,8 +124,8 @@ export default function ReturnsEstimator({ onNavigate, onSetGoalAmount }) {
       <div className="page__head">
         <div className="page__head-row">
           <div>
-            <h1 className="page__title">Returns <em>Estimator</em></h1>
-            <p className="page__sub">Plan your investments and visualise projected growth over time</p>
+            <h1 className="page__title">Wealth <em>Projector</em></h1>
+            <p className="page__sub" style={{ marginTop: "6px" }}>Model your investments and visualise projected growth over time</p>
           </div>
         </div>
       </div>

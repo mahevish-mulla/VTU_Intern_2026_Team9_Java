@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/InvestorPortal.css";
 import Sidebar from "../components/Sidebar";
 import TopBar from "../components/TopBar";
 import Toast from "../components/Toast";
+import ChatBot from "../components/ChatBot";        // ✅ NEW
 import Dashboard from "../pages/Dashboard";
 import BrowseFunds from "../pages/BrowseFunds";
 import MyInvestments from "../pages/MyInvestments";
@@ -20,6 +22,17 @@ export default function InvestorPortal() {
   const [goals, setGoals] = useState([]);
   const [toast, setToast] = useState(null);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const location = useLocation();
+
+  // Sync state with URL tab parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    const validTabs = ["dashboard", "browse", "investments", "goals", "estimator", "profile", "notifications"];
+    if (tab && validTabs.includes(tab)) {
+      setPage(tab);
+    }
+  }, [location]);
 
   useEffect(() => {
     API.get("/api/investments/my")
@@ -122,6 +135,8 @@ export default function InvestorPortal() {
       </div>
 
       {toast && <Toast message={toast} onDone={() => setToast(null)} />}
+      {/* ✅ ChatBot — appears on every page as floating button */}
+      <ChatBot />
     </div>
   );
 }

@@ -40,6 +40,12 @@ export default function Login() {
       localStorage.setItem("role", data.role);
       localStorage.setItem("userId", data.userId);
 
+
+      // ── Persist user info for PDF & profile display ────────
+      localStorage.setItem("userName", data.name || data.userName || "");
+      localStorage.setItem("userEmail", data.email || email);
+      // ──────────────────────────────────────────────────────
+
       if (data.role === "ADMIN") {
         navigate("/admin");
       } else {

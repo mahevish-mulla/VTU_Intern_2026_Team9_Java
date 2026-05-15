@@ -66,12 +66,18 @@ export default function Signup() {
     try {
       const name = `${f.firstName} ${f.lastName}`;
 
-	  const data = await registerUser(name, f.email, f.password, f.phone);
+      const data = await registerUser(name, f.email, f.password, f.phone);
 
-	  localStorage.setItem("token", data.token);
-	  localStorage.setItem("role", data.role);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
 
-	  navigate("/dashboard");
+      // ── Persist user info for PDF & profile display ────────
+      localStorage.setItem("userName", data.name || fullName);
+      localStorage.setItem("userEmail", data.email || f.email);
+      // ──────────────────────────────────────────────────────
+
+
+      navigate("/dashboard");
     } catch (err) {
       setGlobalErr(err.message || "Signup failed");
     }

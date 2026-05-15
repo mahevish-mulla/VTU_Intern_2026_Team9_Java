@@ -62,9 +62,9 @@ export default function Goals({ goals, onAdd, onDelete, onRefresh, investments =
       <div className="page__head">
         <div className="page__head-row">
           <div>
-            <h1 className="page__title">Goals</h1>
-            <p className="page__sub">
-              Define what you&apos;re investing towards and track your progress
+            <h1 className="page__title">Wealth <em>Goals</em></h1>
+            <p className="page__sub" style={{ marginTop: "6px" }}>
+              Define your targets, link investments, and track your path to financial freedom
             </p>
           </div>
           <button className="btn btn--primary" onClick={() => setShowModal(true)}>

@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/passwordReset.css";
 
-const API = "http://localhost:8080/api/auth";
+// const API = "http://localhost:8080/api/auth";
+// AFTER
+const API = "/api/auth";
 
 export default function ForgotPassword() {
   const [step, setStep] = useState(1);
