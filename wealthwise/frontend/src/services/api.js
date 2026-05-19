@@ -1,35 +1,32 @@
 import axios from "axios";
 
-// Investor API — uses investor token
+// Update this with your actual hosted backend URL (e.g., from Railway)
+const BACKEND_URL = "https://your-backend-service.up.railway.app"; 
+
+// Investor API
 const API = axios.create({
-    // baseURL: "http://localhost:8080"
-    baseURL: ""  // ← goes through Nginx, no CORS issues
+    baseURL: BACKEND_URL
 });
 
 API.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
-
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
 });
 
-// Admin API — uses admin token separately
+// Admin API
 export const ADMIN_API = axios.create({
-    // baseURL: "http://localhost:8080"
-    // AFTER
-    baseURL: ""
+    baseURL: BACKEND_URL
 });
 
 ADMIN_API.interceptors.request.use((config) => {
-    const token = localStorage.getItem("adminToken"); // admin token
+    const token = localStorage.getItem("adminToken");
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
-
 
 export default API;
