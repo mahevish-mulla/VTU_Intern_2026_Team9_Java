@@ -1,6 +1,6 @@
 // const API_BASE = "http://localhost:8080/api/auth";
 // AFTER
-const API_BASE = "/api/auth";
+const API_BASE = "https://wealthwise-35qy.onrender.com/api/auth";
 
 async function handleResponse(res) {
   const text = await res.text();
