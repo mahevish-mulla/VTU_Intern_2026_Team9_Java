@@ -1,6 +1,6 @@
 // const API_BASE = "http://localhost:8080/api/auth";
 // AFTER
-const API_BASE = "https://vtu-intern-2026-team9-java-2h33.onrender.com//api/auth";
+const API_BASE = "https://vtu-intern-2026-team9-java-2h33.onrender.com/api/auth";
 
 async function handleResponse(res) {
   const text = await res.text();
