@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Update this with your actual hosted backend URL (e.g., from Railway)
-const BACKEND_URL = "https://wealthwise-35qy.onrender.com"; 
+const BACKEND_URL = "https://wealthwise-35qy.onrender.com";
 
 // Investor API
 const API = axios.create({
