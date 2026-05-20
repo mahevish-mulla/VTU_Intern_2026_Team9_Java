@@ -104,7 +104,8 @@ public class SecurityConfig {
         "http://localhost:3000",
         "https://wealthwise-frontend1.vercel.app",
         "https://*.netlify.app"
-    ));
+    )
+);
         config.setAllowedMethods(List.of(
             "GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
