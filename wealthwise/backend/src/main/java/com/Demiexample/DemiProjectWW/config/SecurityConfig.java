@@ -98,11 +98,12 @@ public class SecurityConfig {
         CorsConfiguration config =
             new CorsConfiguration();
         config.setAllowedOrigins(
-        	    List.of(
-        	        "http://localhost:5173",   // local dev (Vite)
-        	        "http://localhost:3000",    // Docker frontend
-                    "https://wealthwise-frontend1.vercel.app" // New Vercel Production Link
-        	    ));
+    List.of(
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://wealthwise-frontend1.vercel.app",
+        "https://classy-cascaron-2dfaa7.netlify.app"
+    ));
         config.setAllowedMethods(List.of(
             "GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
