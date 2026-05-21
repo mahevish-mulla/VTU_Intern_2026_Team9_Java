@@ -22,7 +22,7 @@ public class ChatService {
             "https://api.groq.com/openai/v1/chat/completions";
 
     // Free Groq model
-    private static final String MODEL = "llama3-8b-8192";
+    private static final String MODEL = "llama-3.1-8b-instant";
 
     // WealthWise system prompt
     private static final String SYSTEM_PROMPT =
