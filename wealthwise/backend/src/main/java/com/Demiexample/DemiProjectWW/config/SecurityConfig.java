@@ -97,11 +97,12 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfig() {
         CorsConfiguration config =
             new CorsConfiguration();
-        config.setAllowedOrigins(
-        	    List.of(
-        	        "http://localhost:5173",   // local dev (Vite)
-        	        "http://localhost:3000"    // Docker frontend
-        	    ));
+        config.setAllowedOriginPatterns(
+    List.of(
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://*.netlify.app"
+    ));
         config.setAllowedMethods(List.of(
             "GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
