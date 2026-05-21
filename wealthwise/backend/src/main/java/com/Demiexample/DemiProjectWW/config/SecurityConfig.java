@@ -80,12 +80,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOriginPatterns(
-            List.of(
-                "http://localhost:5173",
-                "http://localhost:3000",
-                "https://wealthwise-frontend1.vercel.app",
-                "https://*.netlify.app"
-            )
+                List.of(
+                        "http://localhost:5173",
+                        "http://localhost:3000",
+                        "https://*.netlify.app"
+                )
         );
 
         config.setAllowedMethods(
