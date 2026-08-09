@@ -74,39 +74,6 @@ The database is designed using 3NF (Third Normal Form) to ensure data integrity 
 
 ---
 
-## 👥 Team Responsibilities
 
-### **Backend Database Team**
 
-* Designing ER Diagrams and Logical Mapping.
-* Implementing DDL scripts and Foreign Key constraints.
-* Managing NAV History weak entity relationships.
 
-### **Backend Authentication Team**
-
-* Implementing User/Admin registration and Login.
-* Configuring Role-Based Access Control (RBAC).
-* Developing JWT filter logic for secure API calls.
-
-### **Coordination Team**
-
-* Managing the Sprint backlog and daily progress.
-* Ensuring smooth integration between MySQL and Spring Boot Entities.
-* Reviewing documentation and Postman test results.
-
----
-
-## 📈 Future Enhancements
-
-* **Real-time API Integration:** Fetching actual market NAVs via financial APIs.
-* **Advanced Analytics:** Visualizing portfolio growth with charts and graphs.
-* **Redemption Logic:** Enabling users to "sell" units and track realized gains.
-* **Tax Simulation:** Estimating Capital Gains Tax (LTCG/STCG) on simulated returns.
-
----
-
-## 📌 Project Status
-
-**Current Phase:** Active Development 
-
----
